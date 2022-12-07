@@ -1,12 +1,10 @@
-import { useState } from 'react'
-
-
+import LoginScreen from './pages/loginScreen/LoginScreen';
+import NavigationComponent from './components/navigationComponent/NavigationComponent';
 function App() {
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline text-red-600">
-       Simple React Typescript Tailwind Sample
-      </h1>
+    <div className="App bg-gray-100">
+      <NavigationComponent />
+      {/* <LoginScreen /> */}
     </div>
   )
 }
