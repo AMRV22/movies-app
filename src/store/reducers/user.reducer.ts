@@ -49,7 +49,10 @@ const thunkLoginReducer = createAsyncThunk(
   STORE_USER_ACTION,
   async (params: UserCredentials, thunkApi) => {
     const response = await login(params);
-    return response.token;
+    return {
+      token: response.token,
+      email: params.email,
+    };
   }
 );
 

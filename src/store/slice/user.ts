@@ -17,8 +17,6 @@ export const initialState: UserState = {
   token: "",
   user: {
     email: "",
-    lastName: "",
-    name: "",
   },
   loading: false,
 };
@@ -33,9 +31,13 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(thunkLoginReducer.fulfilled, (state, action) => {
+      const { email, token } = action.payload;
       return {
         ...state,
-        token: action.payload,
+        token,
+        user: {
+          email,
+        },
         loading: false,
       };
     });
