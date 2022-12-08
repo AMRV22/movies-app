@@ -68,7 +68,7 @@ const LoginScreen = () => {
               MyMovies website
             </S.LoginTitle>
           </div>
-          <form className='mt-8 space-y-6' action='#' method='POST'>
+          <form className='mt-8 space-y-6' onSubmit={(e) => e.preventDefault()}>
             <div className='space-y-4 rounded-md shadow-sm'>
               <div>
                 <label className='sr-only'>Email address</label>
