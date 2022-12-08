@@ -1,13 +1,22 @@
 import React from "react";
-import LoginScreen from "./pages/loginScreen/LoginScreen";
-import NavigationComponent from "./components/navigationComponent";
+import { Route, Routes } from "react-router-dom";
+import routes from "./router/routes";
 
 const App = () => {
   return (
-    <div className='bg-gray-100'>
-      <NavigationComponent />
-      <LoginScreen />
-    </div>
+    <Routes>
+      {routes.map(({ type: RouteType, component: Component, ...rest }) => (
+        <Route
+          key={rest.path}
+          {...rest}
+          element={
+            <RouteType>
+              <Component />
+            </RouteType>
+          }
+        />
+      ))}
+    </Routes>
   );
 };
 

@@ -1,8 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { thunkLoginReducer } from "./../../store/reducers/user.reducer";
+import useAppDispatch from "./../../utils/hook/useAppDispatch";
 import loginImage from "../../assets/images/cinema.svg";
 import Input from "../../components/styledComponents/elements/inputs";
 
 const LoginScreen = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <div className='flex  h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8 '>
       <div className='bg-white grid grid-cols-1 md:grid-cols-2  shadow sm:rounded-lg'>
@@ -12,7 +17,7 @@ const LoginScreen = () => {
               MyMovies website
             </h2>
           </div>
-          <form className='mt-8 space-y-6' action='#' method='POST'>
+          <form className='mt-8 space-y-6' onSubmit={(e) => e.preventDefault()}>
             <div className='space-y-4 rounded-md shadow-sm'>
               <div>
                 <label className='sr-only'>Email address</label>
@@ -40,6 +45,14 @@ const LoginScreen = () => {
               <button
                 type='submit'
                 className='group relative flex w-full h-10 justify-center rounded-md border border-transparent bg-primary py-2 px-4 text-md font-medium text-white'
+                onClick={() =>
+                  dispatch(
+                    thunkLoginReducer({
+                      email: "eve.holt@reqres.in",
+                      password: "cityslicka",
+                    })
+                  )
+                }
               >
                 Sign in
               </button>
