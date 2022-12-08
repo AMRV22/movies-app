@@ -14,7 +14,7 @@ const MoviesGrid = styled.div`
 `;
 
 const GenreChip = styled.div`
-  ${tw`bg-baby-blue rounded-full px-4 py-1 text-center text-primary`}
+  ${tw`bg-aqua-bg rounded-full px-4 py-1 text-center text-white`}
 `;
 
 const MoviesContainer = styled.div`

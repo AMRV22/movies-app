@@ -10,6 +10,7 @@ const App = () => {
       <NavigationComponent />
       <DetailScreen />
       {/* <HomeScreen /> */}
+      {/* <LoginScreen /> */}
     </div>
   );
 };

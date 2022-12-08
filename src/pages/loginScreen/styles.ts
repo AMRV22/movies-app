@@ -14,7 +14,7 @@ const LoginContainer = styled.div`
 `;
 
 const LoginFormContainer = styled.div`
-  ${tw`bg-white grid grid-cols-1 md:grid-cols-2 shadow sm:rounded-lg`}
+  ${tw`bg-white grid grid-cols-1 md:grid-cols-2 shadow-lg sm:rounded-lg`}
 `;
 
 const ErrorMessages = styled.p`

@@ -10,7 +10,7 @@ const PosterContainer = styled.div`
 `;
 
 const MovieTitle = styled.p`
-  ${tw`text-2xl  font-avenir-bold font-bold tracking-tight text-secondary`}
+  ${tw`text-2xl  font-avenir-bold font-bold tracking-tight text-primary`}
 `;
 
 export { MovieCard, PosterContainer, MovieTitle };

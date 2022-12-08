@@ -4,10 +4,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#05445E",
-        secondary: "#189AB4",
-        "baby-blue": "#D4F1F4",
-        "blue-green": "#75E6DA",
+        primary: "#006778",
+        secondary: "#0093AB",
+        "yellow-b": "#FFD124",
+        "aqua-bg": "#00AFC1",
+        "red-bg" :"#E0144C",
       },
       fontFamily: {
         avenir: ["AvenirRegular", "sans-serif"],

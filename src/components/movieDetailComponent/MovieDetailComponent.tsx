@@ -18,11 +18,11 @@ const MovieDetailComponent = () => {
             Movie Title
           </S.MovieTitle>
           {/* <button>
-            <HeartIcon className="stroke-blue-green stroke-2 h-8 w-8 hover:fill-blue-green" />
+            <HeartIcon className="stroke-aqua-bg stroke-2 h-8 w-8 hover:fill-aqua-bg" />
           </button> */}
         </div>
         <div className="flex items-center my-2">
-          <p className="text-base font-avenir-bold text-left tracking-tight text-primary">
+          <p className="text-base font-avenir-bold text-left tracking-tight text-gray-500">
             loremp ipsum dolor sit amet loremp ipsum dolor sit amet loremp ipsum
             dolor sit amet...
           </p>
@@ -36,11 +36,12 @@ const MovieDetailComponent = () => {
           </p>
         </div>
         <div className="flex items-center">
-          <StarsIcon className="stroke-secondary fill-secondary stroke-2 h-8 w-8 hover:fill-secondary" />
-          <StarsIcon className="stroke-secondary fill-secondary stroke-2 h-8 w-8 hover:fill-secondary" />
-          <StarsIcon className="stroke-secondary fill-secondary stroke-2 h-8 w-8 hover:fill-secondary" />
-          <StarsIcon className="stroke-secondary fill-secondary stroke-2 h-8 w-8 hover:fill-secondary" />
-          <StarsIcon className="stroke-secondary  stroke-2 h-8 w-8 hover:fill-secondary" />
+          <StarsIcon className="stroke-yellow-b fill-yellow-b stroke-2 h-8 w-8 hover:fill-yellow-b" />
+          <StarsIcon className="stroke-yellow-b fill-yellow-b stroke-2 h-8 w-8 hover:fill-yellow-b" />
+          <StarsIcon className="stroke-yellow-b fill-yellow-b stroke-2 h-8 w-8 hover:fill-yellow-b" />
+          <StarsIcon className="stroke-yellow-b fill-yellow-b stroke-2 h-8 w-8 hover:fill-yellow-b" />
+          <StarsIcon className="stroke-yellow-b  stroke-2 h-8 w-8 hover:fill-yellow-b" />
+          
         </div>
       </div>
     </S.MovieCard>
