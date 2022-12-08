@@ -1,4 +1,7 @@
 import { createGlobalStyle } from "styled-components";
+import AvenirBold from "./../../assets/fonts/AvenirNext-Bold-01.ttf";
+import AvenirSemi from "./../../assets/fonts/AvenirNext-DemiBold-03.ttf";
+import AvenirRegular from "./../../assets/fonts/AvenirNext-Regular-08.ttf";
 
 const StyleProvider = createGlobalStyle`
 html,
@@ -16,21 +19,21 @@ body {
 }
 @font-face {
   font-family: AvenirRegular;
-  src: url('../../assets/AvenirNext-Regular-08.ttf') format('truetype');
+  src: url(${AvenirRegular}) format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: fallback;
 }
 @font-face {
   font-family: AvenirSemi;
-  src: url('../../assets/fonts/AvenirNext-DemiBold-03.ttf') format('truetype');
+  src: url(${AvenirSemi}) format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: fallback;
 }
 @font-face {
   font-family: AvenirBold;
-  src: url('../../assets/fonts/AvenirNext-Bold-01.ttf') format('truetype');
+  src: url(${AvenirBold}) format('truetype');
   font-weight: bold;
   font-style: normal;
   font-display: fallback;
