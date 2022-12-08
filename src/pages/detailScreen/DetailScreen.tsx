@@ -7,18 +7,18 @@ const DetailScreen = () => {
     <div className="flex flex-col">
       <div className="grid md:grid-cols-3 sm:grid-cols-1 my-16 mx-8">
         <div className="flex flex-col col-span-1">
-          <div className="w-full overflow-hidden rounded-lg  h-96">
+          <div className="w-full overflow-hidden rounded-lg ">
             <img
               src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
               className="h-full w-full object-cover object-center lg:h-full lg:w-full"
             />
           </div>
-          <div className="flex items-center justify-center my-2">
-            <StarsIcon className="stroke-yellow-b fill-yellow-b stroke-2 h-12 w-12 hover:fill-yellow-b" />
-            <StarsIcon className="stroke-yellow-b fill-yellow-b stroke-2 h-12 w-12 hover:fill-yellow-b" />
-            <StarsIcon className="stroke-yellow-b fill-yellow-b stroke-2 h-12 w-12 hover:fill-yellow-b" />
-            <StarsIcon className="stroke-yellow-b fill-yellow-b stroke-2 h-12 w-12 hover:fill-yellow-b" />
-            <StarsIcon className="stroke-yellow-b  stroke-2 h-12 w-12 hover:fill-yellow-b" />
+          <div className="flex content-end justify-center  my-2">
+            <StarsIcon className="stroke-lavender fill-lavender stroke-2 h-12 w-12 hover:fill-lavender" />
+            <StarsIcon className="stroke-lavender fill-lavender stroke-2 h-12 w-12 hover:fill-lavender" />
+            <StarsIcon className="stroke-lavender fill-lavender stroke-2 h-12 w-12 hover:fill-lavender" />
+            <StarsIcon className="stroke-lavender fill-lavender stroke-2 h-12 w-12 hover:fill-lavender" />
+            <StarsIcon className="stroke-lavender  stroke-2 h-12 w-12 hover:fill-lavender" />
           </div>
         </div>
 
@@ -51,7 +51,7 @@ const DetailScreen = () => {
               Lorem Ipsum
             </p>
           </div>
-          <div className="flex flex-col mx-8 my-8">
+          <div className="flex flex-col mx-8 ">
             <p className="text-gray-500 mb-4">Genres:</p>
             <div className="grid grid-cols-6  gap-4 ">
               <S.GenreChip>Action</S.GenreChip>

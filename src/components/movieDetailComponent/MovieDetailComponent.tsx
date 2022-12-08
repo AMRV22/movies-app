@@ -18,7 +18,7 @@ const MovieDetailComponent = () => {
             Movie Title
           </S.MovieTitle>
           {/* <button>
-            <HeartIcon className="stroke-aqua-bg stroke-2 h-8 w-8 hover:fill-aqua-bg" />
+            <HeartIcon className="stroke-purple-light stroke-2 h-8 w-8 hover:fill-purple-light" />
           </button> */}
         </div>
         <div className="flex items-center my-2">
@@ -36,11 +36,11 @@ const MovieDetailComponent = () => {
           </p>
         </div>
         <div className="flex items-center">
-          <StarsIcon className="stroke-yellow-b fill-yellow-b stroke-2 h-8 w-8 hover:fill-yellow-b" />
-          <StarsIcon className="stroke-yellow-b fill-yellow-b stroke-2 h-8 w-8 hover:fill-yellow-b" />
-          <StarsIcon className="stroke-yellow-b fill-yellow-b stroke-2 h-8 w-8 hover:fill-yellow-b" />
-          <StarsIcon className="stroke-yellow-b fill-yellow-b stroke-2 h-8 w-8 hover:fill-yellow-b" />
-          <StarsIcon className="stroke-yellow-b  stroke-2 h-8 w-8 hover:fill-yellow-b" />
+          <StarsIcon className="stroke-lavender fill-lavender stroke-2 h-8 w-8 hover:fill-lavender" />
+          <StarsIcon className="stroke-lavender fill-lavender stroke-2 h-8 w-8 hover:fill-lavender" />
+          <StarsIcon className="stroke-lavender fill-lavender stroke-2 h-8 w-8 hover:fill-lavender" />
+          <StarsIcon className="stroke-lavender fill-lavender stroke-2 h-8 w-8 hover:fill-lavender" />
+          <StarsIcon className="stroke-lavender  stroke-2 h-8 w-8 hover:fill-lavender" />
           
         </div>
       </div>

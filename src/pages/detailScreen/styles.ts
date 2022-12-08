@@ -6,7 +6,7 @@ const MovieTitle = styled.p`
 `;
 
 const GenreChip = styled.div`
-  ${tw`bg-aqua-bg rounded-full px-4 py-1 text-center text-white`}
+  ${tw`bg-purple-light rounded-full px-4 py-1 text-center text-white`}
 `;
 
 export { MovieTitle, GenreChip };
