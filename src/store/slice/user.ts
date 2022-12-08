@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  deleteTokenReducer,
-  deleteUserReducer,
   loadingReducer,
+  setTokenReducer,
+  setUserReducer,
 } from "./../reducers/user.reducer";
 import IUser from "./../../utils/interfaces/IUser";
 import { thunkLoginReducer } from "./../reducers/user.reducer";
@@ -25,9 +25,9 @@ export const userSlice = createSlice({
   name: "user",
   initialState: initialState,
   reducers: {
-    deleteToken: deleteTokenReducer,
-    deleteUser: deleteUserReducer,
     setLoading: loadingReducer,
+    setToken: setTokenReducer,
+    setUser: setUserReducer,
   },
   extraReducers: (builder) => {
     builder.addCase(thunkLoginReducer.fulfilled, (state, action) => {
@@ -50,6 +50,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { deleteToken, deleteUser, setLoading } = userSlice.actions;
+export const { setLoading, setUser, setToken } =
+  userSlice.actions;
 
 export default userSlice.reducer;

@@ -1,54 +1,37 @@
 import { UserState } from "store/slice/user";
 import { createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import {
-  DELETE_TOKEN_ACTION,
-  DELETE_USER_ACTION,
-  STORE_USER_ACTION,
-} from "./..//actions/user.action";
 import UserCredentials from "./../../utils/types/UserCredentials";
-import { initialState } from "./../../store/slice/user";
 import { login } from "./../../api/entities/Login";
 
-const deleteTokenReducer = (state: UserState, action: PayloadAction<void>) => {
-  if (action.type === DELETE_TOKEN_ACTION) {
-    return {
-      ...state,
-      token: initialState.token,
-    };
-  }
+const setTokenReducer = (state: UserState, action: PayloadAction<string>) => {
   return {
     ...state,
+    token: action.payload,
   };
 };
 
-const deleteUserReducer = (state: UserState, action: PayloadAction<void>) => {
-  if (action.type === DELETE_USER_ACTION) {
-    return {
-      ...state,
-      user: initialState.user,
-    };
-  }
+const setUserReducer = (state: UserState, action: PayloadAction<string>) => {
   return {
     ...state,
+    user: {
+      email: action.payload,
+    },
   };
 };
 
 const loadingReducer = (state: UserState, action: PayloadAction<boolean>) => {
-  if (action.type === DELETE_USER_ACTION) {
-    return {
-      ...state,
-      loading: action.payload,
-    };
-  }
   return {
     ...state,
+    loading: action.payload,
   };
 };
 
 const thunkLoginReducer = createAsyncThunk(
-  STORE_USER_ACTION,
-  async (params: UserCredentials, thunkApi) => {
+  "STORE_USER_ACTION",
+  async (params: UserCredentials) => {
     const response = await login(params);
+    localStorage.setItem("user-email", params.email);
+    localStorage.setItem("user-token", response.token);
     return {
       token: response.token,
       email: params.email,
@@ -56,9 +39,4 @@ const thunkLoginReducer = createAsyncThunk(
   }
 );
 
-export {
-  deleteTokenReducer,
-  deleteUserReducer,
-  loadingReducer,
-  thunkLoginReducer,
-};
+export { loadingReducer, setUserReducer, setTokenReducer, thunkLoginReducer };
