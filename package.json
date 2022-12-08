@@ -18,7 +18,8 @@
     "redux": "^4.2.0",
     "styled-components": "^5.3.6",
     "twin.macro": "^3.1.0",
-    "vite-plugin-svgr": "^2.2.2"
+    "vite-plugin-svgr": "^2.2.2",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@emotion/babel-plugin-jsx-pragmatic": "^0.2.0",
