@@ -1,12 +1,14 @@
-import LoginScreen from './pages/loginScreen/LoginScreen';
-import NavigationComponent from './components/navigationComponent/NavigationComponent';
-function App() {
-  return (
-    <div className="App bg-gray-100">
-      <NavigationComponent />
-      {/* <LoginScreen /> */}
-    </div>
-  )
-}
+import React from "react";
+import LoginScreen from "./pages/loginScreen/LoginScreen";
+import NavigationComponent from "./components/navigationComponent";
 
-export default App
+const App = () => {
+  return (
+    <div className='bg-gray-100'>
+      <NavigationComponent />
+      <LoginScreen />
+    </div>
+  );
+};
+
+export default App;
