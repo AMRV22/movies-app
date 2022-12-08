@@ -1,21 +1,72 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { thunkLoginReducer } from "./../../store/reducers/user.reducer";
-import useAppDispatch from "./../../utils/hook/useAppDispatch";
+import React, { useReducer } from "react";
 import loginImage from "../../assets/images/cinema.svg";
 import Input from "../../components/styledComponents/elements/inputs";
+import * as S from "./styles";
+import { string } from "yup";
+import { loginReducer, validationsReducer } from "./reducer";
+
+const loginParams = {
+  email: "",
+  password: "",
+}
+
+const initialValidations = {
+  validEmail: {},
+  validPassword: {},
+}
+
+let isTouch = {
+  email: 0,
+  password: 0
+}
 
 const LoginScreen = () => {
-  const dispatch = useAppDispatch();
+  const [loginState, dispatch] = useReducer(loginReducer, loginParams);
+  const [validationState, dispatchValidation] = useReducer(validationsReducer, initialValidations)
+
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
+    dispatch({ type: e.currentTarget.name, payload: value });
+    let validation = null;
+
+    if (e.currentTarget.name === "email") {
+      if (value.length > 0)
+        isTouch.email += 1;
+      validation = {
+        isValid: string()
+          .email()
+          .isValidSync(value),
+        required: string()
+          .required()
+          .isValidSync(value),
+        isTouch: isTouch.email > 0
+      }
+    } else {
+      if (value.length > 0)
+        isTouch.password += 1;
+
+      validation = {
+        required: string()
+          .required()
+          .isValidSync(value),
+        isTouch: isTouch.password > 0
+      }
+    }
+    dispatchValidation({
+      type: e.currentTarget.name,
+      payload: validation
+    });
+
+  };
 
   return (
-    <div className='flex  h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8 '>
-      <div className='bg-white grid grid-cols-1 md:grid-cols-2  shadow sm:rounded-lg'>
-        <div className='md:w-full md:max-w-md space-y-8 m-12'>
+    <S.LoginContainer>
+      <S.LoginFormContainer>
+        <div className='md:max-w-md space-y-8 m-12'>
           <div>
-            <h2 className='mt-6 text-center text-3xl md:text-6xl font-bold tracking-tight text-secondary'>
+            <S.LoginTitle >
               MyMovies website
-            </h2>
+            </S.LoginTitle>
           </div>
           <form className='mt-8 space-y-6' onSubmit={(e) => e.preventDefault()}>
             <div className='space-y-4 rounded-md shadow-sm'>
@@ -25,49 +76,48 @@ const LoginScreen = () => {
                   id='email-address'
                   name='email'
                   type='email'
+                  value={loginState.email}
+                  onChange={handleChange}
                   placeholder='Email address'
                 />
+                <S.ErrorMessages>{validationState.validEmail.isTouch && !validationState.validEmail.isValid && "Invalid email"}
+                </S.ErrorMessages>
+                <S.ErrorMessages>{validationState.validEmail.isTouch && !validationState.validEmail.required && "Email is required"}
+                </S.ErrorMessages>
               </div>
               <div>
                 <label className='sr-only'>Password</label>
-                <input
+                <Input
                   id='password'
                   name='password'
                   type='password'
-                  required
-                  className='relative block w-full appearance-none rounded  border border-gray-300 px-3 py-3 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-secondary focus:outline-none focus:ring-secondary sm:text-sm'
+                  value={loginState.password}
+                  onChange={handleChange}
                   placeholder='Password'
                 />
+                <S.ErrorMessages>{validationState.validPassword.isTouch && !validationState.validPassword.required && "Password is required"}
+                </S.ErrorMessages>
               </div>
             </div>
 
             <div>
-              <button
+              <S.LoginButton
                 type='submit'
-                className='group relative flex w-full h-10 justify-center rounded-md border border-transparent bg-primary py-2 px-4 text-md font-medium text-white'
-                onClick={() =>
-                  dispatch(
-                    thunkLoginReducer({
-                      email: "eve.holt@reqres.in",
-                      password: "cityslicka",
-                    })
-                  )
-                }
               >
                 Sign in
-              </button>
+              </S.LoginButton>
             </div>
           </form>
         </div>
-        <div className='md:w-full md:max-w-md py-5'>
+        <div className='md:max-w-md py-5'>
           <img
             className='mx-auto max-h-fit h-36 md:h-fit  w-auto'
             src={loginImage}
             alt='Login Image'
           />
         </div>
-      </div>
-    </div>
+      </S.LoginFormContainer>
+    </S.LoginContainer>
   );
 };
 
