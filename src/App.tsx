@@ -1,12 +1,15 @@
 import React from "react";
-import LoginScreen from "./pages/loginScreen/LoginScreen";
+import LoginScreen from "./pages/loginScreen";
 import NavigationComponent from "./components/navigationComponent";
+import HomeScreen from "./pages/homeScreen";
+import DetailScreen from "./pages/detailScreen";
 
 const App = () => {
   return (
-    <div className='bg-gray-100'>
+    <div className='bg-white'>
       <NavigationComponent />
-      <LoginScreen />
+      <DetailScreen />
+      {/* <HomeScreen /> */}
     </div>
   );
 };
