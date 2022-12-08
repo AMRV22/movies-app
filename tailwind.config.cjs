@@ -1,19 +1,20 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      colors:{
-        'primary': '#05445E',
-        'secondary': '#189AB4',
-        'baby-blue': '#D4F1F4',
-        'blue-green': '#75E6DA',
-
-      }
+      colors: {
+        primary: "#05445E",
+        secondary: "#189AB4",
+        "baby-blue": "#D4F1F4",
+        "blue-green": "#75E6DA",
+      },
+      fontFamily: {
+        avenir: ["AvenirRegular", "sans-serif"],
+        "avenir-bold": ["AvenirBold", "sans-serif"],
+        "avenir-demi": ["AvenirSemi", "sans-serif"],
+      },
     },
   },
   plugins: [],
-}
+};
