@@ -16,4 +16,8 @@ const LoginContainer = styled.div`
 const LoginFormContainer = styled.div`
   ${tw`bg-white grid grid-cols-1 md:grid-cols-2 shadow sm:rounded-lg`}
 `;
-export { LoginTitle, LoginButton, LoginContainer, LoginFormContainer };
+
+const ErrorMessages = styled.p`
+  ${tw`text-xs text-red-500 ml-2`}
+`;
+export { LoginTitle, LoginButton, LoginContainer, LoginFormContainer, ErrorMessages };
