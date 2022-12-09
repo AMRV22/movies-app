@@ -10,7 +10,7 @@ const SearchButton = styled.button`
 `;
 
 const MoviesGrid = styled.div`
-  ${tw`mt-6 mx-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8`}
+  ${tw`mt-6 mx-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2  lg:grid-cols-3 xl:gap-x-8`}
 `;
 
 const GenreChip = styled.div`

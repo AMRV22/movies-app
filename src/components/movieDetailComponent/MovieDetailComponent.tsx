@@ -22,16 +22,16 @@ const MovieDetailComponent = () => {
           </button> */}
         </div>
         <div className="flex items-center my-2">
-          <p className="text-base font-avenir-bold text-left tracking-tight text-gray-500">
+          <p className="text-base font-avenir text-left tracking-tight text-gray-500">
             loremp ipsum dolor sit amet loremp ipsum dolor sit amet loremp ipsum
             dolor sit amet...
           </p>
         </div>
         <div className="flex items-center my-2 justify-between">
-          <p className="text-base font-avenir-bold  tracking-tight text-gray-500">
+          <p className="text-base font-avenir  tracking-tight text-gray-500">
             Release date:
           </p>
-          <p className="text-base font-avenir-bold  tracking-tight text-primary">
+          <p className="text-base font-avenir  tracking-tight text-primary">
             2016/02/10
           </p>
         </div>

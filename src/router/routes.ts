@@ -7,6 +7,7 @@ import ProtectedRoute, {
 
 const LoginPage = lazy(() => import("./../pages/loginScreen/LoginScreen"));
 const HomePage = lazy(() => import("./../pages/homeScreen/HomeScreen"));
+const DetailPage = lazy(() => import("./../pages/detailScreen/DetailScreen"));
 
 type Route = RouteProps & {
   type: (props: PrivateRouteProps | ProtectedRouteProps) => JSX.Element;
@@ -24,6 +25,11 @@ const routes: Route[] = [
     index: true,
     type: PrivateRoute,
     component: HomePage,
+  },
+  {
+    path: "/movie-detail/:id",
+    type: PrivateRoute,
+    component: DetailPage,
   },
 ];
 
