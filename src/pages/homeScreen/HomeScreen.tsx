@@ -3,6 +3,7 @@ import { ReactComponent as SearchIcon } from "@/assets/svg/search.svg";
 import Input from "../../components/styledComponents/elements/inputs";
 import * as S from "./styles";
 import MovieDetailComponent from "../../components/movieDetailComponent";
+import GenresChipComponent from "../../components/genresChipComponent";
 
 const HomeScreen = () => {
   return (
@@ -27,11 +28,11 @@ const HomeScreen = () => {
             <div className="flex flex-col my-6">
               <S.GenresTitle>Genres</S.GenresTitle>
               <div className="grid grid-cols-3  gap-4 mx-4">
-                <S.GenreChip>Action</S.GenreChip>
-                <S.GenreChip>Action</S.GenreChip>
-                <S.GenreChip>Action</S.GenreChip>
-                <S.GenreChip>Action</S.GenreChip>
-                <S.GenreChip>Action</S.GenreChip>
+                <GenresChipComponent name="Action" />
+                <GenresChipComponent name="Action" />
+                <GenresChipComponent name="Action" />
+                <GenresChipComponent name="Action" />
+                <GenresChipComponent name="Action" />
               </div>
             </div>
           </div>

@@ -13,9 +13,6 @@ const MoviesGrid = styled.div`
   ${tw`mt-6 mx-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2  lg:grid-cols-3 xl:gap-x-8`}
 `;
 
-const GenreChip = styled.div`
-  ${tw`bg-purple-light rounded-full px-4 py-1 text-center text-white`}
-`;
 
 const MoviesContainer = styled.div`
   ${tw`md:col-span-3 bg-white rounded-md py-6 border-solid border-2 border-gray-100 shadow-sm`}
@@ -33,7 +30,6 @@ export {
   HomeContainer,
   SearchButton,
   MoviesGrid,
-  GenreChip,
   MoviesContainer,
   MoviesTitle,
   GenresTitle,

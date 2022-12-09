@@ -1,6 +1,7 @@
 import React from "react";
 import { ReactComponent as HeartIcon } from "@/assets/svg/heart.svg";
 import { ReactComponent as StarsIcon } from "@/assets/svg/stars.svg";
+import RatingComponent from "../ratingComponent";
 import * as S from "./styles";
 
 const MovieDetailComponent = () => {
@@ -35,14 +36,9 @@ const MovieDetailComponent = () => {
             2016/02/10
           </p>
         </div>
-        <div className="flex items-center">
-          <StarsIcon className="stroke-lavender fill-lavender stroke-2 h-8 w-8 hover:fill-lavender" />
-          <StarsIcon className="stroke-lavender fill-lavender stroke-2 h-8 w-8 hover:fill-lavender" />
-          <StarsIcon className="stroke-lavender fill-lavender stroke-2 h-8 w-8 hover:fill-lavender" />
-          <StarsIcon className="stroke-lavender fill-lavender stroke-2 h-8 w-8 hover:fill-lavender" />
-          <StarsIcon className="stroke-lavender  stroke-2 h-8 w-8 hover:fill-lavender" />
-          
-        </div>
+        <RatingComponent
+          rating={4}
+          size={8} />
       </div>
     </S.MovieCard>
   );

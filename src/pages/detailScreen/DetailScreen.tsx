@@ -1,6 +1,7 @@
 import React from "react";
 import { ReactComponent as HeartIcon } from "@/assets/svg/heart.svg";
-import { ReactComponent as StarsIcon } from "@/assets/svg/stars.svg";
+import RatingComponent from "../../components/ratingComponent";
+import GenresChipComponent from "../../components/genresChipComponent";
 import * as S from "./styles";
 const DetailScreen = () => {
   return (
@@ -14,11 +15,9 @@ const DetailScreen = () => {
             />
           </div>
           <div className="flex content-end justify-center  my-2">
-            <StarsIcon className="stroke-lavender fill-lavender stroke-2 h-12 w-12 hover:fill-lavender" />
-            <StarsIcon className="stroke-lavender fill-lavender stroke-2 h-12 w-12 hover:fill-lavender" />
-            <StarsIcon className="stroke-lavender fill-lavender stroke-2 h-12 w-12 hover:fill-lavender" />
-            <StarsIcon className="stroke-lavender fill-lavender stroke-2 h-12 w-12 hover:fill-lavender" />
-            <StarsIcon className="stroke-lavender  stroke-2 h-12 w-12 hover:fill-lavender" />
+            <RatingComponent
+              rating={4}
+              size={12} />
           </div>
         </div>
 
@@ -54,11 +53,10 @@ const DetailScreen = () => {
           <div className="flex flex-col mx-8 ">
             <p className="text-gray-500 mb-4">Genres:</p>
             <div className="grid grid-cols-6  gap-4 ">
-              <S.GenreChip>Action</S.GenreChip>
-              <S.GenreChip>Action</S.GenreChip>
-              <S.GenreChip>Action</S.GenreChip>
-              <S.GenreChip>Action</S.GenreChip>
-              <S.GenreChip>Action</S.GenreChip>
+              <GenresChipComponent name="Action" />
+              <GenresChipComponent name="Action" />
+              <GenresChipComponent name="Action" />
+              <GenresChipComponent name="Action" />
             </div>
           </div>
 
