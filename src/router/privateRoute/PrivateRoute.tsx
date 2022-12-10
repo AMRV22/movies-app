@@ -1,3 +1,4 @@
+import NavigationComponent from "./../../components/navigationComponent";
 import React, { Suspense, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
@@ -12,7 +13,12 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
     return <Navigate to='/login' replace />;
   }
 
-  return <Suspense fallback={<>...</>}>{children}</Suspense>;
+  return (
+    <Suspense fallback={<>...</>}>
+      <NavigationComponent />
+      {children}
+    </Suspense>
+  );
 };
 
 export default PrivateRoute;

@@ -5,9 +5,10 @@ import ProtectedRoute, {
   ProtectedRouteProps,
 } from "./protectedRoute/ProtectedRoute";
 
-const LoginPage = lazy(() => import("./../pages/loginScreen/LoginScreen"));
-const HomePage = lazy(() => import("./../pages/homeScreen/HomeScreen"));
-const DetailPage = lazy(() => import("./../pages/detailScreen/DetailScreen"));
+const LoginPage = lazy(() => import("./../pages/loginScreen/"));
+const HomePage = lazy(() => import("./../pages/homeScreen/"));
+const DetailPage = lazy(() => import("./../pages/detailScreen/"));
+const FavoritePage = lazy(() => import("./../pages/favoriteScreen/"));
 
 type Route = RouteProps & {
   type: (props: PrivateRouteProps | ProtectedRouteProps) => JSX.Element;
@@ -27,9 +28,14 @@ const routes: Route[] = [
     component: HomePage,
   },
   {
-    path: "/movie-detail/:id",
+    path: "/:id",
     type: PrivateRoute,
     component: DetailPage,
+  },
+  {
+    path: "/favorites",
+    type: PrivateRoute,
+    component: FavoritePage,
   },
 ];
 
