@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 const HomeContainer = styled.div`
-  ${tw`flex h-screen w-screen  my-4 px-4 sm:px-6 lg:px-8`}
+  ${tw`flex h-screen my-4 px-4 sm:px-6 lg:px-8`}
 `;
 
 const SearchButton = styled.button`
