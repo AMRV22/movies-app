@@ -1,83 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReactComponent as BurgerBar } from "@/assets/svg/burgger-bar.svg";
-import * as S from "./style";
+import * as S from "./styles";
+import { Link } from "react-router-dom";
 
 const NavigationComponent = () => {
+  const [active, setActive] = useState(false);
   return (
-    <nav className='bg-primary'>
-      <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
-        <div className='relative flex h-16 items-center justify-between'>
-          <div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
-            <button
-              type='button'
-              className='inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'
-              aria-controls='mobile-menu'
-              aria-expanded='false'
-            >
-              <span className='sr-only'>Open main menu</span>
-              <BurgerBar className='block h-6 w-6' />
-              <svg
-                className='hidden h-6 w-6'
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke-width='1.5'
-                stroke='currentColor'
-                aria-hidden='true'
-              >
-                <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  d='M6 18L18 6M6 6l12 12'
-                />
-              </svg>
-            </button>
-          </div>
-          <div className='flex flex-1 items-center  sm:items-stretch sm:justify-start'>
-            <div className='flex flex-shrink-0 items-center'>
-              <S.NavbarTitle>MyMovies website</S.NavbarTitle>
-            </div>
-            <div className='hidden sm:ml-6 sm:block'>
-              <div className='flex justify-end space-x-4'>
-                <a
-                  href='#'
-                  className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
-                  aria-current='page'
-                >
-                  Home
-                </a>
+    <S.Navbar>
+      <S.NavWrapper>
+        <S.NavLogo>
+          <S.NavLink to='/'>MyMovie Website</S.NavLink>
+        </S.NavLogo>
+        <S.Menu id='menu'>
+          <li>
+            <S.NavLink to='/'>HOME</S.NavLink>
+          </li>
+          <li>
+            <S.NavLink to='/favorites'>FAVORITES</S.NavLink>
+          </li>
+        </S.Menu>
+      </S.NavWrapper>
+      <S.MenuIcon onClick={() => setActive((prev) => !prev)}>
+        <span className='icon icon-bars'></span>
+        <span className='icon icon-bars overlay'></span>
+      </S.MenuIcon>
 
-                <a
-                  href='#'
-                  className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-                >
-                  Favorites
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className='sm:hidden'>
-        <div className='space-y-1 px-2 pt-2 pb-3'>
-          <a
-            href='#'
-            className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
-            aria-current='page'
-          >
-            Home
-          </a>
-
-          <a
-            href='#'
-            className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
-          >
-            Favorites
-          </a>
-        </div>
-      </div>
-    </nav>
+      <S.SideDrawerMenu className={active ? "open" : ""}>
+        <ul>
+          <li>
+            <Link to='/'>Home</Link>
+          </li>
+          <li>
+            <Link to='/favorites'>Favorites</Link>
+          </li>
+        </ul>
+      </S.SideDrawerMenu>
+      {active && <S.BackDrop onClick={() => setActive((prev) => !prev)} />}
+    </S.Navbar>
   );
 };
 
