@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import tw from "twin.macro";
 
 const PaginationContainer = styled.div`
   display: flex;
@@ -13,13 +14,7 @@ const PaginationContainer = styled.div`
 `;
 
 const PageLinks = styled.li`
-  background-color: #444444;
-  display: inline-block;
-  margin-left: 4px;
-  cursor: pointer;
-  padding: 8px 0;
-  max-width: max-content;
-
+  ${tw`bg-[#444444] inline-block ml-1 cursor-pointer py-2 px-0 max-w-max`}
   p {
     transition: all 0.1s linear;
     display: flex;
@@ -31,9 +26,12 @@ const PageLinks = styled.li`
     text-decoration: none;
     min-width: 44px;
     color: #eeeeee;
+    &:hover {
+      background-color: #26272b;
+    }
   }
 
-  .active {
+  &.active {
     background-color: #26272b;
   }
 `;
