@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import user from "./slice/user";
+import movie from "./slice/movie";
 import thunk from "redux-thunk";
 
 const store = configureStore({
   reducer: {
     user,
+    movie,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(thunk),
