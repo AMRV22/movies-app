@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useReducer, useEffect, useCallback } from "react";
 import { ReactComponent as HeartIcon } from "@/assets/svg/heart.svg";
 import RatingComponent from "./../../components/ratingComponent";
 import GenresChipComponent from "./../../components/genresChipComponent";
@@ -10,6 +10,7 @@ import movieCastReducer from "./reducers/castReducer";
 import { getDetailMovie, getMovieCast, getRelatedMovies } from "../../api/entities/Movie";
 import moment from "moment";
 import MovieDetailComponent from "./../../components/movieDetailComponent";
+import IMovie from "../../utils/interfaces/IMovie";
 
 
 const movieDetail = { movie: null, loading: false };
@@ -22,8 +23,28 @@ const DetailScreen = () => {
   const [movieState, movieDispatch] = useReducer(movieDetailReducer, movieDetail);
   const [relatedMoviesState, relatedMoviesDispatch] = useReducer(relatedMoviesReducer, relatedMovies);
   const [castState, castDispatch] = useReducer(movieCastReducer, movieCast);
+  const [favorite, setFavorite] = useState(false);
 
   const { movie } = movieState;
+
+  const handleFavorite = useCallback(
+    () => {
+      const movieFav = JSON.parse(localStorage.getItem('favorites') ?? "[]") as IMovie[];
+      let auxMovieFav = [...movieFav];
+      if (movie) {
+        if (!(movieFav?.find((target) => target.id === movie?.id))) {
+          auxMovieFav.push(movie);
+        } else {
+          let index = movieFav?.findIndex((target) => target.id === movie.id);
+          auxMovieFav.splice(index, 1);
+        }
+        setFavorite((prev) => !prev);
+      }
+      localStorage.setItem('favorites', JSON.stringify(auxMovieFav));
+    },
+    [movie],
+  )
+
 
   useEffect(() => {
     if (!id && id?.length === 0 && !Number(id))
@@ -69,7 +90,17 @@ const DetailScreen = () => {
     getMovieDetail();
     getCast();
     getRelated();
+  }, [id]);
+
+
+  useEffect(() => {
+    const movieFav = JSON.parse(localStorage.getItem('favorites') ?? "[]") as IMovie[];
+    if (id && movieFav && movieFav.length > 0) {
+      const selectedMovie = movieFav.find((target) => target.id === Number(id));
+      setFavorite(!!selectedMovie);
+    }
   }, [id])
+
 
   if (!movie || movieState.loading)
     return (
@@ -96,15 +127,15 @@ const DetailScreen = () => {
           <div className='flex justify-between items-center mx-8'>
             <div className='flex flex-col'>
               <S.MovieTitle>{movie.title}</S.MovieTitle>
-              <div className='flex justify-between'>
-                <p className='text-gray-500'>{moment(movie.release_date).format("MMM Do YY")}</p>
+              <div className='flex '>
+                <p className='text-gray-500 mr-4'>{moment(movie.release_date).format("MMM Do YY")}</p>
                 <p>
                   IMDB <strong className='text-secondary'> {movie.vote_average}</strong>
                 </p>
               </div>
             </div>
-            <button>
-              <HeartIcon className='stroke-red-bg stroke-2 h-12 w-12 fill-red-bg' />
+            <button onClick={handleFavorite}>
+              <HeartIcon className={`stroke-red-bg stroke-2 h-12 w-12 ${favorite ? "fill-red-bg" : ""}`} />
             </button>
           </div>
           <div className='flex justify-between items-center mx-8 my-8'>

@@ -14,7 +14,7 @@ const PaginationContainer = styled.div`
 `;
 
 const PageLinks = styled.li`
-  ${tw`bg-[#444444] inline-block ml-1 cursor-pointer py-2 px-0 max-w-max`}
+  ${tw`bg-[#810CA8] inline-block ml-1 cursor-pointer py-2 px-0 max-w-max rounded-full`}
   p {
     transition: all 0.1s linear;
     display: flex;
@@ -26,13 +26,15 @@ const PageLinks = styled.li`
     text-decoration: none;
     min-width: 44px;
     color: #eeeeee;
-    &:hover {
-      background-color: #26272b;
-    }
   }
-
+  
+  &:hover {
+    background-color: #2D033B;
+    border-radius: 9999px;
+  }
+  
   &.active {
-    background-color: #26272b;
+    background-color: #2D033B;
   }
 `;
 

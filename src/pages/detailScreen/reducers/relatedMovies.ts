@@ -14,7 +14,6 @@ type ReducerActions = {
 const relatedMoviesReducer = (state: ReducerState, action: ReducerActions) => {
     const { type, payload: { movies, loading } } = action;
 
-    console.log("movies", action);
 
     switch (type) {
         case "LOADING":

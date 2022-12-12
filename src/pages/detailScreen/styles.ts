@@ -6,7 +6,7 @@ const MovieTitle = styled.p`
 `;
 
 const MoviesGrid = styled.div`
-  ${tw`grid grid-cols-1 gap-x-6 sm:grid-cols-2  lg:grid-cols-5 xl:gap-x-8`}
+  ${tw`grid grid-cols-1 gap-x-6 sm:grid-cols-4  lg:grid-cols-5 xl:gap-x-8`}
 `;
 
 export { MovieTitle, MoviesGrid };
