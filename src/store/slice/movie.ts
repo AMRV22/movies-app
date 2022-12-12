@@ -43,9 +43,10 @@ export const movieSlice = createSlice({
           loading: true,
         };
       })
-      .addCase(thunkPopularMovieReducer.rejected, () => {
+      .addCase(thunkPopularMovieReducer.rejected, (state) => {
         return {
-          ...initialState,
+          ...state,
+          loading: false,
         };
       });
 

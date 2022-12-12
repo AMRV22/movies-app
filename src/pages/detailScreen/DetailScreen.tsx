@@ -1,35 +1,105 @@
-import React from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import { ReactComponent as HeartIcon } from "@/assets/svg/heart.svg";
 import RatingComponent from "./../../components/ratingComponent";
 import GenresChipComponent from "./../../components/genresChipComponent";
 import { useParams } from "react-router-dom";
 import * as S from "./styles";
+import movieDetailReducer from "./reducers/movieDetailReducer";
+import relatedMoviesReducer from "./reducers/relatedMovies";
+import movieCastReducer from "./reducers/castReducer";
+import { getDetailMovie, getMovieCast, getRelatedMovies } from "../../api/entities/Movie";
+import moment from "moment";
+import MovieDetailComponent from "./../../components/movieDetailComponent";
+
+
+const movieDetail = { movie: null, loading: false };
+const movieCast = { cast: [], loading: false };
+const relatedMovies = { movies: null, loading: false };
 
 const DetailScreen = () => {
-  const response = useParams();
+  const { id } = useParams<{ id: string }>();
+
+  const [movieState, movieDispatch] = useReducer(movieDetailReducer, movieDetail);
+  const [relatedMoviesState, relatedMoviesDispatch] = useReducer(relatedMoviesReducer, relatedMovies);
+  const [castState, castDispatch] = useReducer(movieCastReducer, movieCast);
+
+  const { movie } = movieState;
+
+  useEffect(() => {
+    if (!id && id?.length === 0 && !Number(id))
+      return
+
+    const getMovieDetail = async () => {
+      movieDispatch({ type: "LOADING", payload: { loading: true } });
+      const response = await getDetailMovie(Number(id));
+      const movie = {
+        ...response,
+        poster_path: import.meta.env.VITE_MOVIE_IMAGES_URL + response.poster_path,
+      }
+      movieDispatch({ type: "MOVIE", payload: { movie: movie } });
+      movieDispatch({ type: "LOADING", payload: { loading: false } });
+    }
+
+    const getCast = async () => {
+      castDispatch({ type: "LOADING", payload: { loading: true } });
+      const { cast } = await getMovieCast(Number(id));
+      const auxCast = cast.map((col) => ({
+        ...col,
+        profile_path: import.meta.env.VITE_MOVIE_IMAGES_URL + col.profile_path
+      }))
+      castDispatch({ type: "CAST", payload: { cast: auxCast } });
+      castDispatch({ type: "LOADING", payload: { loading: false } });
+    }
+
+    const getRelated = async () => {
+      relatedMoviesDispatch({ type: "LOADING", payload: { loading: true } });
+      const response = await getRelatedMovies(Number(id));
+      const auxMovies = {
+        ...response,
+        results: response.results.map((result) => ({
+          ...result,
+          poster_path: import.meta.env.VITE_MOVIE_IMAGES_URL + result.poster_path,
+          backdrop_path:
+            import.meta.env.VITE_MOVIE_IMAGES_URL + result.poster_path,
+        }))
+      }
+      relatedMoviesDispatch({ type: "MOVIES", payload: { movies: auxMovies } });
+      relatedMoviesDispatch({ type: "LOADING", payload: { loading: false } });
+    }
+    getMovieDetail();
+    getCast();
+    getRelated();
+  }, [id])
+
+  if (!movie || movieState.loading)
+    return (
+      <div >
+        ...Loading
+      </div>)
+
   return (
     <div className='flex flex-col'>
       <div className='grid md:grid-cols-3 sm:grid-cols-1 my-16 mx-8'>
         <div className='flex flex-col col-span-1'>
           <div className='w-full overflow-hidden rounded-lg '>
             <img
-              src='https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg'
+              src={movie.poster_path}
               className='h-full w-full object-cover object-center lg:h-full lg:w-full'
             />
           </div>
           <div className='flex content-end justify-center  my-2'>
-            <RatingComponent rating={4} size={12} />
+            <RatingComponent rating={(movie.vote_average / 10) * 5} size={12} />
           </div>
         </div>
 
         <div className='flex flex-col col-span-2 shadow-lg'>
           <div className='flex justify-between items-center mx-8'>
             <div className='flex flex-col'>
-              <S.MovieTitle>Movie Title</S.MovieTitle>
+              <S.MovieTitle>{movie.title}</S.MovieTitle>
               <div className='flex justify-between'>
-                <p className='text-gray-500'>07 E 2016</p>
+                <p className='text-gray-500'>{moment(movie.release_date).format("MMM Do YY")}</p>
                 <p>
-                  IMDB <strong className='text-secondary'> 9.1</strong>{" "}
+                  IMDB <strong className='text-secondary'> {movie.vote_average}</strong>
                 </p>
               </div>
             </div>
@@ -39,61 +109,50 @@ const DetailScreen = () => {
           </div>
           <div className='flex justify-between items-center mx-8 my-8'>
             <p className='text-gray-500'>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum
+              {movie.overview}
             </p>
           </div>
           <div className='flex flex-col mx-8 '>
             <p className='text-gray-500 mb-4'>Genres:</p>
-            <div className='grid grid-cols-6  gap-4 '>
-              <GenresChipComponent name='Action' />
-              <GenresChipComponent name='Action' />
-              <GenresChipComponent name='Action' />
-              <GenresChipComponent name='Action' />
+            <div className='flex flex-row gap-4 '>
+              {
+                movie.genres && movie.genres.map((genre) => (
+                  <GenresChipComponent name={genre.name} key={genre.id} />
+                ))
+              }
             </div>
           </div>
 
           <div className='flex flex-col mx-8 my-8'>
             <p className='text-gray-500 mb-4'>Top Cast:</p>
-            <div className='grid grid-cols-6  gap-4 '>
-              <div className='flex flex-col items-center'>
-                <img
-                  className='inline-block h-16 w-16 rounded-full ring-2 ring-white'
-                  src='https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                  alt=''
-                />
-                <p className='text-gray-500'>Oscar Isaac</p>
-              </div>
-              <div className='flex flex-col items-center'>
-                <img
-                  className='inline-block h-16 w-16 rounded-full ring-2 ring-white'
-                  src='https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                  alt=''
-                />
-                <p className='text-gray-500'>Oscar Isaac</p>
-              </div>
-              <div className='flex flex-col items-center'>
-                <img
-                  className='inline-block h-16 w-16 rounded-full ring-2 ring-white'
-                  src='https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                  alt=''
-                />
-                <p className='text-gray-500'>Oscar Isaac</p>
-              </div>
+            <div className='grid grid-cols-6  gap-4 max-h-80 overflow-y-auto'>
+              {
+                castState.cast && castState.cast.map((cast) => (
+                  <div key={cast.id} className='flex flex-col items-center'>
+                    <img
+                      className='inline-block object-cover object-center h-16 w-16 rounded-full ring-2 ring-white'
+                      src={cast.profile_path}
+                      alt=''
+                    />
+                    <p className='text-gray-500 text-center'>{cast.name}</p>
+                  </div>
+                ))
+              }
             </div>
           </div>
         </div>
       </div>
-      <div className='flex '>
-        <p>Suggested movies</p>
+      <div className='flex flex-col mx-8'>
+        <p className="text-2xl  font-avenir-bold font-bold tracking-tight text-primary">Related movies</p>
+        <div className="d-flex">
+          <S.MoviesGrid>
+            {
+              relatedMoviesState.movies && relatedMoviesState.movies.results.map((movie) => (
+                <MovieDetailComponent movie={movie} key={movie.id} />
+              ))
+            }
+          </S.MoviesGrid>
+        </div>
       </div>
     </div>
   );

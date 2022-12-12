@@ -5,4 +5,8 @@ const MovieTitle = styled.p`
   ${tw`text-3xl  font-avenir-bold font-bold tracking-tight text-primary`}
 `;
 
-export { MovieTitle };
+const MoviesGrid = styled.div`
+  ${tw`grid grid-cols-1 gap-x-6 sm:grid-cols-2  lg:grid-cols-5 xl:gap-x-8`}
+`;
+
+export { MovieTitle, MoviesGrid };

@@ -1,4 +1,5 @@
 import baseConfig from "./../config/baseConfig";
+import {toast} from "react-toastify"
 import axios, { AxiosError } from "axios";
 
 const movieServiceApi = axios.create(
@@ -20,6 +21,15 @@ movieServiceApi.interceptors.request.use(
     Promise.reject(error);
   }
 );
+
+movieServiceApi.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    const response = JSON.parse(error.request.response);
+    toast(response.errors[0] ?? "Error has occurred", {type: "error"});
+  });
 
 const getData = async <T>(endpoint: string, params: T) => {
   try {

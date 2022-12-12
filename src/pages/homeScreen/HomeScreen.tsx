@@ -95,7 +95,11 @@ const HomeScreen = () => {
               {isFiltered && `Search: ${realSearch}`}
             </S.MoviesTitle>
             <S.MoviesGrid>
-              <MovieDetailComponent />
+              {
+                movies && movies.map((movie) => (
+                  <MovieDetailComponent movie={movie} key={movie.id} />
+                ))
+              }
             </S.MoviesGrid>
             <Pagination total={totalPages} />
           </S.MoviesContainer>
@@ -118,6 +122,7 @@ const HomeScreen = () => {
           </div>
         </div>
       </div>
+
     </S.HomeContainer>
   );
 };
