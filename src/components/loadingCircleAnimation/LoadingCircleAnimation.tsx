@@ -10,16 +10,15 @@ const LoadingCircleAnimation = ({ size }: LoadingProps) => {
     let lottieRef = React.useRef<Player>(null);
 
     return (
-        <div className='flex justify-center'>
+
         <Player
-            ref={lottieRef} 
+            ref={lottieRef}
             autoplay={true}
             loop={true}
             controls={true}
             src={circleAnimation}
             style={{ height: `${size}px`, width: `${size}px` }}
         ></Player>
-        </div>
 
     )
 }

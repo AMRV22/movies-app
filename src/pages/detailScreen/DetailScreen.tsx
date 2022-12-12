@@ -14,6 +14,7 @@ import IMovie from "../../utils/interfaces/IMovie";
 import LoadingCircleAnimation from "../../components/loadingCircleAnimation";
 
 
+
 const movieDetail = { movie: null, loading: false };
 const movieCast = { cast: [], loading: false };
 const relatedMovies = { movies: null, loading: false };
@@ -105,11 +106,11 @@ const DetailScreen = () => {
 
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col my-16'>
       {
         movie && !movieState.loading ?
           <div className='grid md:grid-cols-3 sm:grid-cols-1 my-16 mx-8'>
-            <div className='flex flex-col col-span-1'>
+            <div className='flex flex-col md:col-span-1 sm:col-span-1 '>
               <div className='w-full overflow-hidden rounded-lg '>
                 <img
                   src={movie.poster_path}
@@ -121,7 +122,7 @@ const DetailScreen = () => {
               </div>
             </div>
 
-            <div className='flex flex-col col-span-2 shadow-lg'>
+            <div className='flex flex-col md:col-span-2 sm:col-span-1 shadow-lg'>
               <div className='flex justify-between items-center mx-8'>
                 <div className='flex flex-col'>
                   <S.MovieTitle>{movie.title}</S.MovieTitle>
@@ -143,7 +144,7 @@ const DetailScreen = () => {
               </div>
               <div className='flex flex-col mx-8 '>
                 <p className='text-gray-500 mb-4'>Genres:</p>
-                <div className='flex flex-row gap-4 '>
+                <div className='flex flex-row gap-4 flex-wrap'>
                   {
                     movie.genres && movie.genres.map((genre) => (
                       <GenresChipComponent name={genre.name} key={genre.id} />
@@ -167,14 +168,18 @@ const DetailScreen = () => {
                       </div>
                     ))
                       :
-                      <LoadingCircleAnimation size={150} />
+                      <div className="flex grow justify-center col-span-6">
+                        <LoadingCircleAnimation size={150} />
+                      </div>
                   }
                 </div>
               </div>
             </div>
           </div>
           :
-          <LoadingCircleAnimation size={300} />
+          <div className="flex justify-center">
+            <LoadingCircleAnimation size={300} />
+          </div>
       }
 
       {
@@ -190,7 +195,10 @@ const DetailScreen = () => {
                 }
               </S.MoviesGrid>
             </div>
-          </div> : <LoadingCircleAnimation size={300} />
+          </div> :
+          <div className="flex justify-center">
+            <LoadingCircleAnimation size={300} />
+          </div>
       }
 
     </div>

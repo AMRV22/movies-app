@@ -1,10 +1,12 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useCallback, FormEvent } from "react";
 import loginImage from "../../assets/images/cinema.svg";
 import Input from "../../components/styledComponents/elements/inputs";
 import * as S from "./styles";
 import { string } from "yup";
+import { useNavigate } from "react-router-dom";
 import { loginReducer, validationsReducer } from "./reducer";
-
+import useAppDispatch from "./../../utils/hook/useAppDispatch";
+import { thunkLoginReducer } from "./../../store/reducers/user.reducer";
 const loginParams = {
   email: "",
   password: "",
@@ -23,6 +25,22 @@ let isTouch = {
 const LoginScreen = () => {
   const [loginState, dispatch] = useReducer(loginReducer, loginParams);
   const [validationState, dispatchValidation] = useReducer(validationsReducer, initialValidations)
+  const loginDispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const loginFunction = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      
+      e.preventDefault();
+      const { email, password } = loginState;
+      const { validEmail, validPassword } = validationState;
+      if (validEmail.isValid && validEmail.required && validPassword.required) {
+        loginDispatch(thunkLoginReducer({ email, password }));
+        navigate("/");
+      }
+    },
+    [loginState, validationState]
+  );
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
@@ -68,7 +86,7 @@ const LoginScreen = () => {
               MyMovies website
             </S.LoginTitle>
           </div>
-          <form className='mt-8 space-y-6' onSubmit={(e) => e.preventDefault()}>
+          <form className='mt-8 space-y-6' onSubmit={loginFunction}>
             <div className='space-y-4 rounded-md shadow-sm'>
               <div>
                 <label className='sr-only'>Email address</label>

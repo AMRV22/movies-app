@@ -14,7 +14,7 @@ const PaginationContainer = styled.div`
 `;
 
 const PageLinks = styled.li`
-  ${tw`bg-[#810CA8] inline-block ml-1 cursor-pointer py-2 px-0 max-w-max rounded-full`}
+  ${tw`bg-[#C147E9] inline-block ml-1 cursor-pointer py-2 px-0 max-w-max rounded-full`}
   p {
     transition: all 0.1s linear;
     display: flex;
@@ -22,9 +22,9 @@ const PageLinks = styled.li`
     justify-content: center;
     align-items: center;
     font-weight: 300;
-    padding-top: 1px;
+    padding-top: 2px;
     text-decoration: none;
-    min-width: 44px;
+    min-width: 40px;
     color: #eeeeee;
   }
   

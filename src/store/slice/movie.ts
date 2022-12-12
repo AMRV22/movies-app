@@ -57,7 +57,7 @@ export const movieSlice = createSlice({
           page,
           movies: results,
           totalPages: total_pages,
-          loading: true,
+          loading: false,
           isFiltered,
         };
       })
@@ -70,6 +70,7 @@ export const movieSlice = createSlice({
       .addCase(thunkFilterMoviesReducer.rejected, () => {
         return {
           ...initialState,
+          loading: false,
         };
       });
   },

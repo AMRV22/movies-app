@@ -3,6 +3,8 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import debounce from "./../../utils/functions/debounce";
 import useQuery from "./../../utils/hook/useQuery";
 import * as S from "./styles";
+import { ReactComponent as RightArrow } from "../../assets/svg/right-arrow.svg";
+import { ReactComponent as LeftArrow } from "../../assets/svg/left-arrow.svg";
 
 type PaginationProps = {
   total: number;
@@ -138,13 +140,18 @@ const Pagination = ({ total }: PaginationProps) => {
               nextPageDebounce(currentPage > 2 ? currentPage - 1 : 1)
             }
           >
-            <p>Prev</p>
+            <p>
+              <LeftArrow className="stroke-2 my-1 h-3.5" />
+            </p>
           </S.PageLinks>
         )}
         {activePageLinks}
         {currentPage < total && (
-          <S.PageLinks onClick={() => nextPageDebounce(currentPage + 1)}>
-            <p>Next</p>
+          <S.PageLinks  onClick={() => nextPageDebounce(currentPage + 1)}>
+            <p>
+              
+               <RightArrow className="stroke-2 my-1 h-3.5"  />
+            </p>
           </S.PageLinks>
         )}
       </ul>

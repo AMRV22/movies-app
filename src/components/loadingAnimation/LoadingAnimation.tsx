@@ -10,14 +10,17 @@ const LoadingAnimation = ({ size }: LoadingProps) => {
     let lottieRef = React.useRef<Player>(null);
 
     return (
-        <Player
-            ref={lottieRef} // set the ref to your class instance
-            autoplay={true}
-            loop={true}
-            controls={true}
-            src={paperPlaneAnimation}
-            style={{ height: `${size}px`, width: `${size}px` }}
-        ></Player>
+        <div className='flex justify-center'>
+            <Player
+                ref={lottieRef} // set the ref to your class instance
+                autoplay={true}
+                loop={true}
+                controls={true}
+                src={paperPlaneAnimation}
+                style={{ height: `${size}px`, width: `${size}px` }}
+            ></Player>
+        </div>
+
     )
 }
 
