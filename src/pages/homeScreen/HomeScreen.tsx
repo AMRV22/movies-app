@@ -12,6 +12,7 @@ import {
 } from "./../../store/reducers/movie.reducer";
 import useAppSelector from "./../../utils/hook/useAppSelector";
 import debounce from "./../../utils/functions/debounce";
+import LoadingCircleAnimation from "../../components/loadingCircleAnimation";
 
 const HomeScreen = () => {
   const [search, setSearch] = useState("");
@@ -81,28 +82,32 @@ const HomeScreen = () => {
     searchMovie(_search, _page);
   }, [queryParams]);
 
-  useEffect(() => {
-    console.log(movies, isFiltered, totalPages);
-  }, [movies]);
 
   return (
     <S.HomeContainer>
       <div className='space-y-8 py-16 rounded-md'>
         <div className='grid md:grid-cols-4 sm:grid-cols-1'>
-          <S.MoviesContainer>
-            <S.MoviesTitle>
-              {!isFiltered && "Current Popular Movies"}
-              {isFiltered && `Search: ${realSearch}`}
-            </S.MoviesTitle>
-            <S.MoviesGrid>
-              {
-                movies && movies.map((movie) => (
-                  <MovieDetailComponent movie={movie} key={movie.id} />
-                ))
-              }
-            </S.MoviesGrid>
-            <Pagination total={totalPages} />
-          </S.MoviesContainer>
+          {
+            !loading ?
+              <S.MoviesContainer>
+                <S.MoviesTitle>
+                  {!isFiltered && "Current Popular Movies"}
+                  {isFiltered && `Search: ${realSearch}`}
+                </S.MoviesTitle>
+                <S.MoviesGrid>
+                  {
+                    movies && movies.map((movie) => (
+                      <MovieDetailComponent movie={movie} key={movie.id} />
+                    ))
+                  }
+                </S.MoviesGrid>
+                <Pagination total={totalPages} />
+              </S.MoviesContainer> :
+              <div className="md:col-span-3">
+                <LoadingCircleAnimation size={300} />
+              </div>
+          }
+
           <div className='row-start-1 md:row-span-2 flex flex-col py-4 px-4 '>
             <div className='flex'>
               <div className='mx-4 w-full'>
