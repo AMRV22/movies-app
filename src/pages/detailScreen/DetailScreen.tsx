@@ -155,7 +155,7 @@ const DetailScreen = () => {
 
               <div className='flex flex-col mx-8 my-8'>
                 <p className='text-gray-500 mb-4'>Top Cast:</p>
-                <div className='flex flex-wrap justify-between gap-4 max-h-80 overflow-y-auto'>
+                <div className='grid md:grid-cols-6 sm:grid-cols-2  gap-4 max-h-80 overflow-y-auto'>
                   {
                     !castState.loading && castState.cast ? castState.cast.map((cast) => (
                       <div key={cast.id} className='flex flex-col items-center'>
