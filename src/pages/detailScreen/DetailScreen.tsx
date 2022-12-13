@@ -101,6 +101,7 @@ const DetailScreen = () => {
       const selectedMovie = movieFav.find((target) => target.id === Number(id));
       setFavorite(!!selectedMovie);
     }
+    window.scrollTo(0, 0)
   }, [id])
 
 
